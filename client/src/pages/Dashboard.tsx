@@ -2,6 +2,7 @@ import { useState } from "react";
 import MainLayout from "../components/layouts/MainLayout";
 import { ToastProvider, Button } from "../components/ui/index";
 import { notify } from "../util/notify";
+import { InputField, PasswordInputField, Checkbox, Radio, Select, TextArea, MultiSelect, FileUploadField} from  "../components/ui/forms/index";
 
 const Dashboard = () => {
 
@@ -40,10 +41,18 @@ const Dashboard = () => {
       setIsLoading(false);
     }
   };
+  
+  const [roles, setRoles] = useState<string[]>([]);
+
+  const handleFileSelect = (selectedFiles: File[]) => {
+    console.log('Selected files:', selectedFiles);
+  };
+
+  const [textArea, setTextArea] = useState('');
 
   const content = (
     <>
-      <div className="space-y-12 pb-20">
+      <div className="space-y-12 pb-auto">
         <h1 className="text-text">Button & Toast Notification Usage Examples</h1>
 
         {/* 🔔 Notification Trigger Example */}
@@ -98,6 +107,100 @@ const Dashboard = () => {
           </div>
 
         </div>
+
+        {/* FORMS */}
+        <div className="space-y-12 pb-auto">
+          <h1 className="text-text">Forms</h1>
+          <div className="flex flex-col space-x-4 gap-3">
+            <InputField 
+            label="Email"
+            name="email"
+            type="email"
+            placeholder="Enter your Email Address"
+            iconName="FaEnvelope"
+            required
+            error="test">
+            </InputField>
+
+            <PasswordInputField
+            label="Password"
+            name="password"
+            placeholder="Enter your Password..."
+            error="Wrong Password"></PasswordInputField>
+
+            <Checkbox
+            label="Is Enrolled?"
+            name="status"></Checkbox>
+          </div>
+
+          <div className="inline-flex gap-3">
+            <Radio name="gender" label="Male"/>
+            <Radio name="gender" label="Female"/>
+          </div>
+          <Select
+          name="languages"
+          label="Languages"
+          iconName="FaLanguage"
+          required
+          error="Language is Required!"
+          options={[
+            {
+              value: "english",
+              label: "English"
+            },
+            {
+              value: "francais",
+              label: "Francais"
+            },
+            {
+              value: "deutsch",
+              label: "Deutsch"
+            },
+            {
+              value: "tagalog",
+              label: "Tagalog"
+            },
+            {
+              value: "hiligaynon",
+              label: "Hiligaynon"
+            },
+          ]}/>
+        </div>
+
+        <MultiSelect
+          label="Roles"
+          options={[
+            { value: 'admin', label: 'Admin' },
+            { value: 'teacher', label: 'Teacher' },
+          ]}
+          selectedValues={roles}
+          onChange={setRoles}
+          iconName="FaUsers"
+        />
+
+        <FileUploadField
+          label="Avatar"
+          name="files"
+          accept="image/jpg,jpeg,png"
+          onFileSelect={handleFileSelect}
+        />
+
+        <FileUploadField
+          label="Images"
+          name="files"
+          maxFiles={2}
+          multiple
+          accept="image/jpg,jpeg,png"
+          onFileSelect={handleFileSelect}
+        />
+
+        <TextArea
+          label="Message"
+          value={textArea}
+          onChange={(e) => setTextArea(e.target.value)}
+          showCounter
+          maxLength={200}
+        />
       </div>
 
       <ToastProvider />
