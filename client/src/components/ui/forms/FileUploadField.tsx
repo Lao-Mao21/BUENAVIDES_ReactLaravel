@@ -109,7 +109,7 @@ export const FileUploadField = ({
 
   return (
     <div className={`${fullWidth ? 'w-full' : 'w-72'} flex flex-col gap-2`}>
-      
+
       {/* LABEL */}
       {label && (
         <label

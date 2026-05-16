@@ -38,7 +38,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     `;
 
     return (
-      <div className={`${fullWidth ? 'w-full' : 'w-72'} flex flex-col gap-0`}>
+      <div className={`${fullWidth ? 'w-full' : 'w-72'} flex flex-col gap-2`}>
         
         {label && (
           <label
@@ -68,7 +68,6 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             id={id}
             ref={ref}
             disabled={disabled}
-            style={{ backgroundImage: 'none', paddingRight: '0' }}
             className={`
               peer ${baseSelectStyles}
               ${iconName ? 'pl-11' : ''}
@@ -105,5 +104,3 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     );
   }
 );
-
-Select.displayName = 'Select';
